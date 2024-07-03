@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
 import Landing from "./pages/Landing"
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
+import Register from './pages/Register'
+import About from './pages/About'
+
 const App = () => {
   return (
     <div>
@@ -13,7 +16,9 @@ const App = () => {
       <Navbar/>
         <Routes>
           <Route path="/" element={<Landing/>}/>
+          <Route path="/about" element={<About/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
           <Route path="/*" element={<NotFound/>}/>
        
         </Routes>

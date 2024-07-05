@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { AiOutlineClose } from 'react-icons/ai'; // Import close icon
+import { AiOutlineClose, AiFillProfile } from 'react-icons/ai'; 
+import { IoExitOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import AppContext from '../context/appProvider';
 
 const Navbar = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const { loggedIn, setLoggedIn } = useContext(AppContext);
     const [menuOpen, setMenuOpen] = useState(false);
+
+    let profpic = null;
+    try {
+        const token = localStorage.getItem('sessionToken');
+        if (token) {
+            const { profpic: decodedProfpic } = JSON.parse(atob(token.split(".")[1]));
+            profpic = decodedProfpic;
+        }
+    } catch (error) {
+        console.error("Error parsing token", error);
+    }
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -13,6 +26,11 @@ const Navbar = () => {
 
     const closeMenu = () => {
         setMenuOpen(false);
+    };
+
+    const handleLogout = () => {
+        setLoggedIn(false);
+        localStorage.removeItem("sessionToken");
     };
 
     return (
@@ -24,10 +42,12 @@ const Navbar = () => {
                             <GiHamburgerMenu
                                 className={`text-3xl md:hidden cursor-pointer ${menuOpen ? 'hidden' : 'block'}`}
                                 onClick={toggleMenu}
+                                aria-label="Open menu"
                             />
                             <AiOutlineClose
                                 className={`text-3xl md:hidden cursor-pointer ${menuOpen ? 'block' : 'hidden'}`}
                                 onClick={closeMenu}
+                                aria-label="Close menu"
                             />
                         </div>
                         <div className='flex'>
@@ -55,17 +75,22 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className='md:flex md:items-center'>
-                            <div className='ml-4 flex-shrink-0'>
+                            <div className='ml-4 flex flex-shrink-0 items-center'>
                                 {loggedIn ? (
                                     <>
+                                        {profpic ? (
+                                            <img className="h-8 rounded-full" src={profpic} alt="Profile Pic"/>
+                                        ) : (
+                                            <AiFillProfile className="h-8 w-8 text-gray-300"/>
+                                        )}
                                         <Link to='/profile' className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                                             Profile
                                         </Link>
                                         <button
-                                            onClick={() => setLoggedIn(false)}
+                                            onClick={handleLogout}
                                             className='ml-4 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium'
                                         >
-                                            Logout
+                                            <IoExitOutline className="text-2xl"/>
                                         </button>
                                     </>
                                 ) : (
@@ -96,12 +121,12 @@ const Navbar = () => {
                             Posts
                         </Link>
                         <div className='flex flex-col text-center'>
-                             <Link to='/login' className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
-                                            Login
-                                        </Link>
-                                        <Link to='/register' className='ml-4 bg-green-400 hover:bg-green-500 text-white px-3 py-2 rounded-md text-sm font-medium'>
-                                            Sign Up
-                                        </Link>
+                            <Link to='/login' className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
+                                Login
+                            </Link>
+                            <Link to='/register' className='ml-4 bg-green-400 hover:bg-green-500 text-white px-3 py-2 rounded-md text-sm font-medium'>
+                                Sign Up
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -8,11 +8,12 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import About from './pages/About'
 import Posts from './pages/Posts'
-
+import {AppProvider} from './context/appProvider'
+import Profile from "./pages/Profile"
 const App = () => {
   return (
     <div>
-     
+     <AppProvider>
       <Router>
       <Navbar/>
         <Routes>
@@ -21,11 +22,13 @@ const App = () => {
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/posts" element={<Posts/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/*" element={<NotFound/>}/>
        
         </Routes>
         <Footer/>
       </Router>
+      </AppProvider>
     </div>
   )
 }

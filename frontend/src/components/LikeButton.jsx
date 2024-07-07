@@ -6,7 +6,7 @@ const LikeButton = ({ postId, userId }) => {
     const backendURL = import.meta.env.VITE_BACKEND_URL;
     const [liked, setLiked] = useState(false);
     const [likes, setLikes] = useState(0);
-
+    console.log(postId)
     useEffect(() => {
         const fetchPost = async () => {
             try {

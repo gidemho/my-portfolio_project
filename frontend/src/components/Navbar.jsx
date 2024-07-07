@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose, AiFillProfile } from 'react-icons/ai'; 
 import { IoExitOutline } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppContext from '../context/appProvider';
 
 const Navbar = () => {
+    const navigate = useNavigate()
     const { loggedIn, setLoggedIn } = useContext(AppContext);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -31,6 +32,7 @@ const Navbar = () => {
     const handleLogout = () => {
         setLoggedIn(false);
         localStorage.removeItem("sessionToken");
+        navigate("/login")
     };
 
     return (

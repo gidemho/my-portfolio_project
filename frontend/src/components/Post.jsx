@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaRegThumbsUp } from 'react-icons/fa'
 import { IoChatbox } from 'react-icons/io5'
 import LikeButton from '../components/LikeButton'
 

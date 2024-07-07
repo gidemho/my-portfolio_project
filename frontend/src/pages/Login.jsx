@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import Spinner from '../components/Spinner'; // Assuming Spinner component is created as shown previously
+import Spinner from '../components/Spinner'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppContext from '../context/appProvider';
@@ -32,7 +32,8 @@ const Login = () => {
                 const response = await axios.post(`${backendURL}/api/v1/auth/login`, formData);
                 setResponseMessage(response.data.message);
                 const { token } = response.data
-              
+                const { profpic } = JSON.parse(atob(token.split(".")[1]))
+
                 localStorage.setItem("sessionToken", token)
                 if (response.status === 200) {
                     toast.success("Logged in successfully!");

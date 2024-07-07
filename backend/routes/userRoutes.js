@@ -11,7 +11,7 @@ userRouter.get("/api/v1/user/profile/:id", userController.getProfile);
 /* Routes for posts */
 userRouter.post("/api/v1/user/post", authMiddleware, postController.createPost);
 userRouter.get("/api/v1/posts/:id", postController.getPostById);
-userRouter.get("/api/v1/posts/all", postController.getAllPosts);
+userRouter.get("/api/v1/allposts", postController.getAllPosts);
 userRouter.post("/api/v1/posts/like/:id", postController.likePost);
 
 module.exports = userRouter;

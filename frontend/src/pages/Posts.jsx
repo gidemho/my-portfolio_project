@@ -26,7 +26,7 @@ const Posts = () => {
       }
       try {
        
-        const postData = await axios.get(`${BACKEND_URL}/api/v1/posts/all`, {
+        const postData = await axios.get(`${BACKEND_URL}/api/v1/allposts`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -40,13 +40,14 @@ const Posts = () => {
     }
     fetchPostData()
   }, [])
-  console.log(typeof (postDetails))
+  console.log(postDetails)
   return (
     <div className='relative'>
       <Searchbar />
       <Postform ghostMode={showForm} />
       <section className='flex flex-col gap-5'>
         <h1 className='text-4xl font-bold text-center'>Posts</h1>
+       
         {postDetails.map(post => (
           <Post key={post._id}
             title={post.title}

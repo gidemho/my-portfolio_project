@@ -8,8 +8,8 @@ const postSchema = new Schema(
       required: true,
     },
     description: {
-        type: String, 
-        required: true
+      type: String,
+      required: true
     },
     body: {
       type: String,
@@ -20,6 +20,14 @@ const postSchema = new Schema(
       ref: "Users",
       required: true,
     },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+      }],
+    likers: [{
+      type: Schema.Types.ObjectId,
+      ref: "Users"
+    }]
   },
   { timestamps: true }
 );

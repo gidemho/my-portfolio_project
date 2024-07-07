@@ -44,7 +44,7 @@ const LikeButton = ({ postId, userId }) => {
     return (
         <div className="container flex gap-4 items-center">
             <button className='like switch' onClick={likeAction}>
-                {liked ? <AiFillLike className='text-lg text-red-600' /> : <AiOutlineLike className='text-md' />}
+                {liked ?  <AiOutlineLike className='text-md'/> : <AiFillLike className='text-lg text-red-600' /> }
             </button>
             <p className='text-lg text-white'>{likes}</p>
         </div>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import Spinner from '../components/Spinner'; 
+import Spinner from '../components/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import AppContext from '../context/appProvider';
 const Login = () => {
     const { setLoggedIn } = useContext(AppContext)
@@ -13,7 +14,7 @@ const Login = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
-
+    const [visiblePassword, setVisiblePassword] = useState(false)
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -32,7 +33,6 @@ const Login = () => {
                 const response = await axios.post(`${backendURL}/api/v1/auth/login`, formData);
                 setResponseMessage(response.data.message);
                 const { token } = response.data
-                const { profpic } = JSON.parse(atob(token.split(".")[1]))
 
                 localStorage.setItem("sessionToken", token)
                 if (response.status === 200) {
@@ -81,17 +81,28 @@ const Login = () => {
                             placeholder="Enter your email"
                         />
                     </div>
-                    <div className="mb-6">
+                    <div className="mb-6 relative">
                         <label htmlFor="password" className="block text-gray-200 text-sm font-bold mb-2">Password</label>
                         <input
-                            type="password"
+                            type={visiblePassword ? "text" : "password"}
                             id="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline relative"
                             placeholder="Enter your password"
                         />
+                        <div className='swap absolute right-3 top-9'>
+                            {visiblePassword ?
+                            <FaEyeSlash className='text-xl'
+                            onClick={() => { setVisiblePassword(!visiblePassword) }} />
+                            :
+                                <FaEye className='text-xl'
+                                    onClick={() => {setVisiblePassword(!visiblePassword)}}/> 
+
+                                
+                            }
+                        </div>
                     </div>
                     <div className="flex items-center justify-between">
                         <button

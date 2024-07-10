@@ -73,8 +73,8 @@ const getPostById = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: 'Invalid post ID' });
         }
-        const post = await Post.findById(id).populate('author', 'username email');
-
+        const post = await Post.findById(id).populate('author', 'username');
+        console.log(post)
         if (!post) {
             return res.status(404).json({ message: "No post exists with that ID" });
         }

@@ -17,7 +17,7 @@ const createComment = async (req, res) => {
       author: userId,
       post: postId,
     });
-
+    
     await newComment.save();
 
     await Post.findByIdAndUpdate(postId, {
@@ -25,7 +25,7 @@ const createComment = async (req, res) => {
       $inc: { commentsCount: 1 },
     });
 
-    res.status(201).json(newComment);
+    res.status(201).json({newComment});
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
@@ -36,10 +36,11 @@ const getCommentsByPostId = async (req, res) => {
 
   try {
     const comments = await Comment.find({ post: postId })
-      .populate("author", "username email")
+      .populate("author", "username")
       .sort({ createdAt: -1 });
 
     res.status(200).json(comments);
+    console.log(comments)
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }

@@ -1,7 +1,6 @@
 import React from 'react';
-import { IoChatbox } from 'react-icons/io5';
 import LikeButton from '../components/LikeButton';
-import Comment from '../components/Comment'; // Import the Comment component
+import Comment from '../components/Comment';
 
 const Post = ({ title, description, body, likes, commentsCount, userId, postId }) => {
   return (
@@ -11,9 +10,9 @@ const Post = ({ title, description, body, likes, commentsCount, userId, postId }
         <h3 className='text-2xl font-light'>{description}</h3>
         <p className='text-md'>{body}</p>
 
-        <div className='reactions flex gap-5 m-5'>
+        <div className='reactions flex flex-col gap-5 m-5'>
           <LikeButton initialLikes={likes} userId={userId} postId={postId} />
-          <Comment postId={postId} userId={userId} /> {/* Render Comment component */}
+          <Comment postId={postId} userId={userId} />
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ userRouter.get("/api/v1/allposts", postController.getAllPosts);
 userRouter.post("/api/v1/posts/like/:id", postController.likePost);
 
 /*Routes for comments */
-userRouter.get("/api/v1/comments/:postId", authMiddleware, commentController.getCommentsByPostId)
+userRouter.get("/api/v1/comment/:postId", authMiddleware, commentController.getCommentsByPostId)
 userRouter.post("/api/v1/comment/create", authMiddleware, commentController.createComment)
 userRouter.delete("/api/v1/comment/delete/:commentId", authMiddleware, commentController.deleteComment)
 

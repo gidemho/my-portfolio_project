@@ -6,15 +6,16 @@ const mongoose = require("mongoose");
 */
 async function dbConnect() {
   try {
-    const dbString = `mongodb+srv://${process.env.PROD_DB_USERNAME}:${process.env.PROD_DB_PASSWORD}@cluster0.rmjefxt.mongodb.net`;
+    // const dbString = `mongodb+srv://${process.env.PROD_DB_USERNAME}:${process.env.PROD_DB_PASSWORD}@cluster0.rmjefxt.mongodb.net`;
+    const dbString = process.env.DB_STRING
     await mongoose.connect(dbString, {
-      dbName: "GBlog", // Replace with your actual database name
+      dbName: "GBlog", 
       useNewUrlParser: true,
     });
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("MongoDB connection error:", error);
-    process.exit(1); // Exit process with failure
+    process.exit(1); 
   }
 }
 

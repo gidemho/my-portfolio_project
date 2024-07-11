@@ -3,6 +3,14 @@ End of foundations ALX
 
 The Glog
 
+
+
+                      
+![Screenshot 2024-07-11 021425](https://github.com/gidemho/my-portfolio_project/assets/135678932/add484a6-f672-424b-b876-fd5c23512c22)
+
+
+
+   
 Features
 
 User-friendly Interface: Intuitive and clean UI for an enhanced user experience.
